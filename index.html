@@ -601,10 +601,8 @@
   </header>
 
   <!-- Page Tabs -->
-  <div class="page-tabs">
-    <button class="page-tab active" onclick="switchPage('generator')">⚡ Generator</button>
-    <button class="page-tab" onclick="switchPage('stress')">🔥 Stress Test</button>
-  </div>
+  <button class="page-tab active" onclick="switchPage('generator', event)">⚡ Generator</button>
+  <button class="page-tab" onclick="switchPage('stress', event)">🔥 Stress Test</button>
 
   <!-- GENERATOR PAGE -->
   <div class="page visible" id="page-generator">
@@ -976,12 +974,11 @@
   function randCallId() { return 'call_' + Math.random().toString(36).substr(2, 20); }
 
   // ─── Project switching ────────────────────────────
-  function switchProject(project, event) {
-    currentProject = project;
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    if (event) event.target.classList.add('active');
-    document.querySelectorAll('.fields-section').forEach(f => f.classList.remove('visible'));
-    document.getElementById(project + '-fields').classList.add('visible');
+  function switchPage(page, event) {  // Add event parameter
+    document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+    if (event) event.target.classList.add('active');  // Check before using
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('visible'));
+    document.getElementById('page-' + page).classList.add('visible');
   }
 
   function switchPage(page) {
